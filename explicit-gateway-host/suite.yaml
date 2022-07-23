@@ -1,0 +1,25 @@
+kind: Suite
+apiVersion: test.gatekeeper.sh/v1alpha1
+metadata:
+  name: require-explicit-gateway-host
+tests:
+  - name: require-explicit-gateway-host
+    template: template.yaml
+    constraint: examples/require-explicit-gateway-host/constraint.yaml
+    cases:
+      - name: allowed-host-1
+        object: examples/require-explicit-gateway-host/allow-host-1.yaml
+        assertions:
+          - violations: no
+      - name: allowed-host-2
+        object: examples/require-explicit-gateway-host/allow-host-2.yaml
+        assertions:
+          - violations: no
+      - name: disallowed-host-1
+        object: examples/require-explicit-gateway-host/disallow-host-1.yaml
+        assertions:
+          - violations: yes
+      - name: disallowed-host-2
+        object: examples/require-explicit-gateway-host/disallow-host-2.yaml
+        assertions:
+          - violations: yes
