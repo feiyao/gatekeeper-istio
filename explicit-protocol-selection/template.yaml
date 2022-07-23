@@ -36,15 +36,12 @@ spec:
         msg := sprintf("port: %v name or appProtocol is invalid", [port])
       }
 
-      # port has appProtocol, or appProtocol with name
-      # when have both name and appProtocol the latter takes precedence
       _is_valid(port, protocols) {
         port.appProtocol
 
         _match_app_protocol(port.appProtocol, protocols)
       }
 
-      # port has name only
       _is_valid(port, protocols) {
         not port.appProtocol
         port.name
